@@ -1,19 +1,19 @@
+import { useState } from "react";
+
 export function DemoPage() {
 
 
   // react works using rerenders and states
-  // if we try to use a normal variable as a value holder and we need to show it on the screen
-  // it will not update the UI, unless it is explicitly called in a function
-  // in this case `showCounter` will show the right count
-  // but the div with the counter value will always be 1 (untill it is rerendered and gets a change to use the latest value)
+  // if we need to show something on the screen and expect your component to update on its change 
+  // you need to maintain the variable in a hook
 
-  // a normal variable
-  let counter = 1;
-
+  const [counter,setCounter] = useState(0)
 
   // increment variable value by 1
   const handleOnClick = () => {
-    counter += 1;
+      // setCounter(counter++) // you should not update state like this as it modifies the original state without notifying the component and component behaviour will be hard to predict
+      setCounter(counter + 1) // this does not update the actual counter so its fine
+      // setCounter((prev) => prev + 1) // this is another way to set state by passing a callback which has the previous value
   };
 
   // show counter value on screen alert
